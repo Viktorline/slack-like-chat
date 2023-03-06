@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Viktorline/frontend-project-12#readme",
   "dependencies": {
-    "@fastify/jwt": "^6.6.0",
+    "@fastify/jwt": "^6.7.0",
     "@fastify/static": "^6.9.0",
     "@hexlet/chat-server": "^1.1.6"
   }
