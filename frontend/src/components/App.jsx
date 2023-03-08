@@ -1,9 +1,16 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './Login.jsx';
+import PageNotFound from './PageNotFound.jsx';
+import Home from './Home.jsx';
+
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <h1 className="text-center mb-4">Текст по центру</h1>
-    </header>
-  </div>
+  <BrowserRouter>
+    <Routes>
+      <Route path="" element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;

@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "chat like Slack",
+  "description": "ChatOMatic",
   "main": "src/index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Viktorline/frontend-project-12#readme",
   "dependencies": {
     "@fastify/jwt": "^6.7.0",
-    "@fastify/static": "^6.9.0",
+    "@fastify/static": "^5.0.0",
     "@hexlet/chat-server": "^1.1.6"
   }
 }
