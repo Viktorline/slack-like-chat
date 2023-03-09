@@ -1,9 +1,24 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { useFormik } from 'formik';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Button, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { Form, Button } from 'react-bootstrap';
+import useAuth from '../hooks/index.js';
+
+import routes from '../routes.js';
 
 const Login = () => {
+  const [authFailed, setAuthFailed] = useState(false);
+  const auth = useAuth();
+  const inputRef = useRef();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -16,11 +31,23 @@ const Login = () => {
         .max(40, 'Username must be at most 40 characters'),
       password: Yup.string()
         .required('Password is required')
-        .min(6, 'Password must be at least 6 characters')
+        .min(5, 'Password must be at least 5 characters')
         .max(50, 'Password must be at most 50 characters'),
     }),
 
-    onSubmit: () => console.log('submit'),
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(routes.loginPath(), values);
+        auth.logIn(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+        console.log(response.data);
+        navigate('/');
+      } catch (err) {
+        setAuthFailed(true);
+        inputRef.current.select();
+        console.log(err);
+      }
+    },
   });
 
   return (
@@ -37,7 +64,8 @@ const Login = () => {
             required=""
             placeholder="Login"
             id="username"
-            isInvalid={formik.touched.username && !!formik.errors.username}
+            isInvalid={(formik.touched.username && !!formik.errors.username) || authFailed}
+            ref={inputRef}
           />
           <Form.Label htmlFor="username">Login</Form.Label>
           <Form.Control.Feedback type="invalid">{formik.errors.username}</Form.Control.Feedback>
@@ -53,10 +81,15 @@ const Login = () => {
             placeholder="Password"
             type="password"
             id="password"
-            isInvalid={formik.touched.password && !!formik.errors.password}
+            isInvalid={(formik.touched.password && !!formik.errors.password) || authFailed}
           />
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control.Feedback type="invalid">{formik.errors.password}</Form.Control.Feedback>
+          {authFailed && (
+            <Form.Control.Feedback type="invalid">
+              Invalid username or password
+            </Form.Control.Feedback>
+          )}
         </Form.Group>
         <Button
           disabled={!formik.isValid}
@@ -67,7 +100,6 @@ const Login = () => {
           Submit
         </Button>
       </Form>
-      <Link to="/">to Home Page</Link>
     </div>
   );
 };
