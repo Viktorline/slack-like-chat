@@ -4,7 +4,6 @@ env:
 
 extends:
   - eslint:recommended
-  - eslint-config-prettier
   - prettier
   - airbnb
   - plugin:react/recommended
