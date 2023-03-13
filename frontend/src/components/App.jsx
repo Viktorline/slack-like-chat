@@ -50,11 +50,13 @@ const LoginRoute = () => {
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
-      <Routes>
-        <Route path="" element={<LoginRoute />} />
-        <Route path="login" element={<Login />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <div className="d-flex flex-column vh-100">
+        <Routes>
+          <Route path="" element={<LoginRoute />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   </AuthProvider>
 );

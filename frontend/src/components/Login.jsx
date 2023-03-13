@@ -10,8 +10,8 @@ import useAuth from '../hooks/index.js';
 import routes from '../routes.js';
 
 const Login = () => {
+  const { logIn } = useAuth();
   const [authFailed, setAuthFailed] = useState(false);
-  const auth = useAuth();
   const inputRef = useRef();
   const navigate = useNavigate();
 
@@ -37,10 +37,10 @@ const Login = () => {
 
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.loginPath(), values);
-        auth.logIn(response.data);
-        localStorage.setItem('user', JSON.stringify(response.data));
-        console.log(response.data);
+        const { data } = await axios.post(routes.loginPath(), values);
+        logIn(data);
+        localStorage.setItem('user', JSON.stringify(data));
+        console.log(data);
         navigate('/');
       } catch (err) {
         setAuthFailed(true);
