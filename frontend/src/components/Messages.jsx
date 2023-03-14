@@ -1,33 +1,81 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import io from 'socket.io-client';
+import useAuth from '../hooks/index.js';
 import { selectors as channelsSelectors } from '../slices/channelsSlice.js';
-import { selectors as messagesSelectors } from '../slices/messagesSlice.js';
+import {
+  actions as messagesActions,
+  selectors as messagesSelectors,
+} from '../slices/messagesSlice.js';
+
+// axios.post('/api/v1/signup', { username: 'newuser', password: '123456' }).then((response) => {
+//   console.log(response.data);
+// });
+
+const socket = io();
 
 const Messages = () => {
   const [message, setMessage] = useState('');
   const inputRef = useRef();
+  const lastMessageRef = useRef();
+  const auth = useAuth();
+  const dispatch = useDispatch();
+
+  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  const currentChannel = useSelector((state) =>
+    channelsSelectors.selectById(state, currentChannelId),
+  );
+  const messages = useSelector(messagesSelectors.selectAll);
+  const currentMessages = messages.filter((message) => message.channelId === currentChannelId);
 
   useEffect(() => {
     inputRef.current.focus();
   });
 
+  useEffect(() => {
+    lastMessageRef.current.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [currentMessages]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(message);
-    setMessage('');
+    if (message) {
+      const body = message;
+      const channelId = currentChannelId;
+      const { username } = auth.user;
+      const data = {
+        body,
+        channelId,
+        username,
+      };
+      console.log(username, data.body);
+      socket.emit('newMessage', data, (response) => {
+        console.log(response);
+      });
+
+      setMessage('');
+
+      socket.on('newMessage', (payload) => {
+        dispatch(messagesActions.addMessage(payload));
+      });
+    }
   };
 
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-
-  const currentChannel = useSelector((state) =>
-    channelsSelectors.selectById(state, currentChannelId),
-  );
-
-  const messages = useSelector(messagesSelectors.selectAll);
+  const messagesRender = () => {
+    if (currentMessages.length === 0) {
+      return null;
+    }
+    return currentMessages.map((message) => (
+      <div key={message.id} className="text-break mb-2">
+        <b>{message.username}</b>: {message.body}
+      </div>
+    ));
+  };
 
   return (
     <div className="col p-0 h-100">
@@ -36,17 +84,11 @@ const Messages = () => {
           <p className="m-0">
             <b>#{currentChannel?.name}</b>
           </p>
-          <span className="text-muted">{messages.length} messages</span>
+          <span className="text-muted">{currentMessages.length} messages</span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
-          <div className="text-break mb-2">
-            <b>admin: </b>
-            <span>Hi!</span>
-          </div>
-          <div className="text-break mb-2">
-            <b>lolguy: </b>
-            <span>One more test message</span>
-          </div>
+          {messagesRender()}
+          <span ref={lastMessageRef}></span>
         </div>
         <div className="mt-auto px-5 py-3">
           <form onSubmit={handleSubmit} noValidate="" className="py-1 border rounded-2">
