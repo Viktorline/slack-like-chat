@@ -26,7 +26,9 @@ const Messages = () => {
     channelsSelectors.selectById(state, currentChannelId),
   );
   const messages = useSelector(messagesSelectors.selectAll);
-  const currentMessages = messages.filter((message) => message.channelId === currentChannelId);
+  const currentMessages = messages.filter(
+    (currentMessage) => currentMessage.channelId === currentChannelId,
+  );
 
   useEffect(() => {
     inputRef.current.focus();
@@ -40,26 +42,27 @@ const Messages = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message) {
-      const body = message;
-      const channelId = currentChannelId;
-      const { username } = auth.user;
-      const data = {
-        body,
-        channelId,
-        username,
-      };
-      console.log(username, data.body);
-      socket.emit('newMessage', data, (response) => {
-        console.log(response);
-      });
-
-      setMessage('');
-
-      socket.on('newMessage', (payload) => {
-        dispatch(messagesActions.addMessage(payload));
-      });
+    if (!message) {
+      return;
     }
+    const body = message;
+    const channelId = currentChannelId;
+    const { username } = auth.user;
+    const data = {
+      body,
+      channelId,
+      username,
+    };
+    console.log(username, data.body);
+    socket.emit('newMessage', data, (response) => {
+      console.log(response);
+    });
+
+    setMessage('');
+
+    socket.on('newMessage', (payload) => {
+      dispatch(messagesActions.addMessage(payload));
+    });
   };
 
   const handleChange = (e) => {
@@ -70,9 +73,9 @@ const Messages = () => {
     if (currentMessages.length === 0) {
       return null;
     }
-    return currentMessages.map((message) => (
-      <div key={message.id} className="text-break mb-2">
-        <b>{message.username}</b>: {message.body}
+    return currentMessages.map(({ id, username, body }) => (
+      <div key={id} className="text-break mb-2">
+        <b>{username}</b>: {body}
       </div>
     ));
   };
@@ -88,7 +91,7 @@ const Messages = () => {
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesRender()}
-          <span ref={lastMessageRef}></span>
+          <span ref={lastMessageRef} />
         </div>
         <div className="mt-auto px-5 py-3">
           <form onSubmit={handleSubmit} noValidate="" className="py-1 border rounded-2">
