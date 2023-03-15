@@ -25,6 +25,7 @@ rules:
   # function-paren-newline: off
   # react/jsx-one-expression-per-line: off
   # object-curly-newline: 'off'
+  functional/no-conditional-statements: off
   
   import/extensions: 0
   import/no-unresolved: 0

@@ -14,6 +14,7 @@ const SocketProvider = ({ socket, children }) => {
     if (response.status !== 'ok') {
       console.log(response.status);
     }
+    return null;
   });
 
   socket.on('newMessage', (payload) => {
@@ -21,12 +22,14 @@ const SocketProvider = ({ socket, children }) => {
   });
 
   const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
-    try {
+    if (response.status !== 'ok') {
       const { id } = response.data;
+      console.log(response.data);
       dispatch(channelsActions.setCurrentChannelId(id));
-    } catch {
-      throw new Error(response.status);
+    } else {
+      console.log(response.status);
     }
+    return null;
   });
 
   socket.on('newChannel', (payload) => {

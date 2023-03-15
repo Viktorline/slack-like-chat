@@ -19,7 +19,9 @@ const Messages = () => {
   const chat = useSocket();
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const currentChannel = useSelector((state) => channelsSelectors.selectById(state, currentChannelId));
+  const currentChannel = useSelector(
+    (state) => channelsSelectors.selectById(state, currentChannelId),
+  );
   const messages = useSelector(messagesSelectors.selectAll);
   const currentMessages = messages.filter(
     (currentMessage) => currentMessage.channelId === currentChannelId,
