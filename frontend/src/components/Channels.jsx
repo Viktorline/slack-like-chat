@@ -39,16 +39,12 @@ const Channels = (props) => {
     );
   };
 
-  const handleAddChannel = () => {
-    showModal('addNewChannel');
-  };
-
   return (
     <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
       <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
         <span>Channels</span>
         <button
-          onClick={handleAddChannel}
+          onClick={() => showModal('addNewChannel')}
           type="button"
           className="p-0 text-primary btn btn-group-vertical"
         >

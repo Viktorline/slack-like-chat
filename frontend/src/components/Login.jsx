@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
-import useAuth from '../hooks/index.js';
+import { useAuth } from '../hooks/index.js';
 
 import routes from '../routes.js';
 

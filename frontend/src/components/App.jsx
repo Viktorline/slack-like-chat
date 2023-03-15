@@ -1,13 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import {
-  BrowserRouter, Navigate, Route, Routes,
-} from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Chat from './Chat.jsx';
 import Login from './Login.jsx';
 import PageNotFound from './PageNotFound.jsx';
 
-import AuthContext from '../contexts/index.js';
-import useAuth from '../hooks/index.js';
+import { AuthContext } from '../contexts/index.js';
+import { useAuth } from '../hooks/index.js';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -51,15 +49,15 @@ const LoginRoute = () => {
 
 const App = () => (
   <AuthProvider>
-    <BrowserRouter>
-      <div className="d-flex flex-column vh-100">
+    <div className="d-flex flex-column vh-100">
+      <BrowserRouter>
         <Routes>
           <Route path="" element={<LoginRoute />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   </AuthProvider>
 );
 
