@@ -21,10 +21,10 @@ plugins:
   - functional
 
 rules:
-  implicit-arrow-linebreak: off
-  function-paren-newline: off
-  react/jsx-one-expression-per-line: off
-  object-curly-newline: 'off'
+  # implicit-arrow-linebreak: off
+  # function-paren-newline: off
+  # react/jsx-one-expression-per-line: off
+  # object-curly-newline: 'off'
   
   import/extensions: 0
   import/no-unresolved: 0
