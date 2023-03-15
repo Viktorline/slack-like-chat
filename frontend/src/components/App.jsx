@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Navigate, Route, Routes,
+} from 'react-router-dom';
 import Chat from './Chat.jsx';
 import Login from './Login.jsx';
 import PageNotFound from './PageNotFound.jsx';

@@ -19,9 +19,7 @@ const Messages = () => {
   const chat = useSocket();
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const currentChannel = useSelector((state) =>
-    channelsSelectors.selectById(state, currentChannelId),
-  );
+  const currentChannel = useSelector((state) => channelsSelectors.selectById(state, currentChannelId));
   const messages = useSelector(messagesSelectors.selectAll);
   const currentMessages = messages.filter(
     (currentMessage) => currentMessage.channelId === currentChannelId,
@@ -66,7 +64,9 @@ const Messages = () => {
     }
     return currentMessages.map(({ id, username, body }) => (
       <div key={id} className="text-break mb-2">
-        <b>{username}</b>:{body}
+        <b>{username}</b>
+        :
+        {body}
       </div>
     ));
   };
@@ -76,9 +76,16 @@ const Messages = () => {
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
-            <b>#{currentChannel?.name}</b>
+            <b>
+              #
+              {currentChannel?.name}
+            </b>
           </p>
-          <span className="text-muted">{currentMessages.length} messages</span>
+          <span className="text-muted">
+            {currentMessages.length}
+            {' '}
+            messages
+          </span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesRender()}
