@@ -51,7 +51,9 @@ const Channels = (props) => {
                   <Dropdown.Item onClick={() => showModal('removeChannel', channel.id)}>
                     Delete
                   </Dropdown.Item>
-                  <Dropdown.Item>Rename</Dropdown.Item>
+                  <Dropdown.Item onClick={() => showModal('renameChannel', channel.id)}>
+                    Rename
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ) : (

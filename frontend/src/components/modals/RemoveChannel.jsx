@@ -21,11 +21,11 @@ const Remove = (props) => {
       <Modal.Body>
         <p className="lead">Sure?</p>
         <div className="d-flex justify-content-end">
-          <Button className="me-2" variant="secondary" onClick={onHide}>
-            Cancel
-          </Button>
-          <Button type="submit" variant="danger" onClick={() => handleRemove(id)}>
+          <Button className="me-2" type="submit" variant="danger" onClick={() => handleRemove(id)}>
             Delete
+          </Button>
+          <Button variant="secondary" onClick={onHide}>
+            Cancel
           </Button>
         </div>
       </Modal.Body>
