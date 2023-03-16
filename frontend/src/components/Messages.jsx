@@ -101,7 +101,7 @@ const Messages = () => {
                 name="body"
                 aria-label="New message"
                 placeholder="Type Message..."
-                className="border-0 p-0 ps-2"
+                className="border-0 p-0 ps-2 form-control"
                 value={formik.values.body}
                 ref={inputRef}
                 disabled={formik.isSubmitting}

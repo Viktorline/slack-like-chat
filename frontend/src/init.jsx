@@ -14,7 +14,7 @@ const SocketProvider = ({ socket, children }) => {
     if (response.status !== 'ok') {
       console.log(response.status);
     }
-    return null;
+    // return null;
   });
 
   socket.on('newMessage', (payload) => {
@@ -29,7 +29,7 @@ const SocketProvider = ({ socket, children }) => {
     } else {
       console.log(response.status);
     }
-    return null;
+    // return null;
   });
 
   socket.on('newChannel', (payload) => {

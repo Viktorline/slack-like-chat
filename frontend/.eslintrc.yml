@@ -26,7 +26,8 @@ rules:
   # react/jsx-one-expression-per-line: off
   # object-curly-newline: 'off'
   functional/no-conditional-statements: off
-  
+  react/jsx-no-constructed-context-values: off
+
   import/extensions: 0
   import/no-unresolved: 0
   react/prop-types: 0

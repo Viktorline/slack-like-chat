@@ -1,6 +1,7 @@
 import addNewChannel from './AddNewChannel.jsx';
+import removeChannel from './RemoveChannel.jsx';
 
-const modals = { addNewChannel };
+const modals = { addNewChannel, removeChannel };
 
 const getModal = (modalType) => modals[modalType];
 

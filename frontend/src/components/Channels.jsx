@@ -41,15 +41,15 @@ const Channels = (props) => {
   };
 
   return (
-    <Col className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
-      <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
+    <Col className="col-4 col-md-2 border-end pt-3 px-0 bg-light">
+      <div className="d-flex justify-content-between align-items-center mb-3 ps-4 pe-2">
         <span>Channels</span>
         <Button
           onClick={() => showModal('addNewChannel')}
-          variant="link"
-          className="p-0 text-primary btn btn-group-vertical"
+          variant="outline-primary"
+          className="border p-1 m-1"
         >
-          <span>+</span>
+          <span className="font-weight-bold">+</span>
         </Button>
       </div>
       {channelsRender()}

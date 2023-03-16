@@ -65,11 +65,11 @@ const Add = (props) => {
           </Form.Label>
           <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
           <div className="d-flex justify-content-end">
-            <Button className="me-2" variant="secondary" onClick={onHide}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="primary">
+            <Button className="me-2" type="submit" variant="primary">
               Create
+            </Button>
+            <Button variant="secondary" onClick={onHide}>
+              Cancel
             </Button>
           </div>
         </Form>
