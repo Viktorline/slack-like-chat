@@ -1,7 +1,9 @@
 import cn from 'classnames';
 import React from 'react';
 
-import { Button, Col, Nav } from 'react-bootstrap';
+import {
+  Button, ButtonGroup, Col, Dropdown, Nav,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   actions as channelsActions,
@@ -23,18 +25,48 @@ const Channels = (props) => {
     return (
       <Nav fill variant="pills" className="d-flex flex-column px-2" as="ul">
         {channels.map((channel) => (
-          <li key={channel.id} className="nav-item w-100">
-            <button
-              type="button"
-              onClick={() => handleClick(channel.id)}
-              className={cn('w-100', 'rounded-0', 'text-start', 'btn', {
-                'btn-secondary': channel.id === currentChannelId,
-              })}
-            >
-              <span className="me-1">#</span>
-              {channel.name}
-            </button>
-          </li>
+          <Nav.Item as="li" key={channel.id} className="w-100">
+            {channel.removable ? (
+              <Dropdown as={ButtonGroup} className="w-100">
+                <button
+                  type="button"
+                  onClick={() => handleClick(channel.id)}
+                  className={cn('w-100', 'rounded-0', 'text-start', 'text-truncate', 'btn', {
+                    'btn-secondary': channel.id === currentChannelId,
+                  })}
+                >
+                  <span className="me-1">#</span>
+                  {channel.name}
+                </button>
+
+                <Dropdown.Toggle
+                  split
+                  variant={channel.id === currentChannelId ? 'secondary' : 'light'}
+                  className="flex-grow-0 text-end"
+                >
+                  <span className="visually-hidden">controls</span>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => showModal('removeChannel', channel.id)}>
+                    Delete
+                  </Dropdown.Item>
+                  <Dropdown.Item>Rename</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <button
+                type="button"
+                onClick={() => handleClick(channel.id)}
+                className={cn('w-100', 'rounded-0', 'text-start', 'text-truncate', 'btn', {
+                  'btn-secondary': channel.id === currentChannelId,
+                })}
+              >
+                <span className="me-1">#</span>
+                {channel.name}
+              </button>
+            )}
+          </Nav.Item>
         ))}
       </Nav>
     );
