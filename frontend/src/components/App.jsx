@@ -3,8 +3,10 @@ import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
 import Chat from './Chat.jsx';
+import Header from './Header.jsx';
 import Login from './Login.jsx';
 import PageNotFound from './PageNotFound.jsx';
+import Registration from './Registration.jsx';
 
 import { AuthContext } from '../contexts/index.js';
 import { useAuth } from '../hooks/index.js';
@@ -51,15 +53,17 @@ const LoginRoute = () => {
 
 const App = () => (
   <AuthProvider>
-    <div className="d-flex flex-column vh-100">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="d-flex flex-column vh-100">
+        <Header />
         <Routes>
           <Route path="" element={<LoginRoute />} />
+          <Route path="/registration" element={<Registration />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   </AuthProvider>
 );
 
