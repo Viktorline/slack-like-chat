@@ -26,7 +26,7 @@ const RegistrationPage = () => {
       .max(40, '40 symbols max'),
     password: Yup.string()
       .required('Password is required')
-      .min(6, 'Password 6 symbols min')
+      .min(5, 'Password 5 symbols min')
       .max(50, 'Password 50 symbols max'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
   });

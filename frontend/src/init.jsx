@@ -1,7 +1,10 @@
+import i18next from 'i18next';
 import React from 'react';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider as StoreProvider, useDispatch, useSelector } from 'react-redux';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
+import resources from './locales/index.js';
 import { actions as channelsActions } from './slices/channelsSlice';
 import store from './slices/index.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
@@ -83,11 +86,20 @@ const SocketProvider = ({ socket, children }) => {
   );
 };
 
-const init = (socket) => {
+const init = async (socket) => {
+  const i18n = i18next.createInstance();
+
+  await i18n.use(initReactI18next).init({
+    resources,
+    fallbackLng: 'ru',
+  });
+
   const vdom = (
     <StoreProvider store={store}>
       <SocketProvider socket={socket}>
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
       </SocketProvider>
     </StoreProvider>
   );
