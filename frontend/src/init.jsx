@@ -14,40 +14,37 @@ const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
-  const addNewMessage = (message) =>
-    socket.emit('newMessage', message, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-      // return null;
-    });
+  const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
+    // return null;
+  });
 
   socket.on('newMessage', (payload) => {
     dispatch(messagesActions.addMessage(payload));
   });
 
-  const addNewChannel = (channel) =>
-    socket.emit('newChannel', channel, (response) => {
-      if (response.status !== 'ok') {
-        const { id } = response.data;
-        console.log(response.data);
-        dispatch(channelsActions.setCurrentChannelId(id));
-      } else {
-        console.log(response.status);
-      }
-      // return null;
-    });
+  const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
+    if (response.status !== 'ok') {
+      const { id } = response.data;
+      console.log(response.data);
+      dispatch(channelsActions.setCurrentChannelId(id));
+    } else {
+      console.log(response.status);
+    }
+    // return null;
+  });
 
   socket.on('newChannel', (payload) => {
     dispatch(channelsActions.addChannel(payload));
   });
 
-  const removeChannel = (id) =>
-    socket.emit('removeChannel', { id }, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-    });
+  const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
+  });
 
   socket.on('removeChannel', (payload) => {
     dispatch(channelsActions.removeChannel(payload));
@@ -58,12 +55,11 @@ const SocketProvider = ({ socket, children }) => {
     }
   });
 
-  const renameChannel = (renamedChannel) =>
-    socket.emit('renameChannel', renamedChannel, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-    });
+  const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
+  });
 
   socket.on('renameChannel', (payload) => {
     const { name, id } = payload;
