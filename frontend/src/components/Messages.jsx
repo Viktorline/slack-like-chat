@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
+import leoProfanity from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
-
-import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useAuth, useSocket } from '../hooks/index.js';
 import { selectors as channelsSelectors } from '../slices/channelsSlice.js';
 import { selectors as messagesSelectors } from '../slices/messagesSlice.js';
@@ -15,6 +15,10 @@ const Messages = () => {
   const auth = useAuth();
   const chat = useSocket();
   const { t } = useTranslation();
+
+  leoProfanity.clearList();
+  leoProfanity.add(leoProfanity.getDictionary('en'));
+  leoProfanity.add(leoProfanity.getDictionary('ru'));
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = useSelector(
@@ -46,10 +50,11 @@ const Messages = () => {
     validationSchema,
     onSubmit: (values) => {
       const { body } = values;
+      const cleanedMessage = leoProfanity.clean(body);
       const channelId = currentChannelId;
       const { username } = auth.user;
       const data = {
-        body,
+        body: cleanedMessage,
         channelId,
         username,
       };
