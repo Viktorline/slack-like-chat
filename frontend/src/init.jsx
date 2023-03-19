@@ -1,3 +1,4 @@
+import { ErrorBoundary, Provider } from '@rollbar/react';
 import i18next from 'i18next';
 import React from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
@@ -13,37 +14,40 @@ const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
-  const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
-    if (response.status !== 'ok') {
-      console.log(response.status);
-    }
-    // return null;
-  });
+  const addNewMessage = (message) =>
+    socket.emit('newMessage', message, (response) => {
+      if (response.status !== 'ok') {
+        console.log(response.status);
+      }
+      // return null;
+    });
 
   socket.on('newMessage', (payload) => {
     dispatch(messagesActions.addMessage(payload));
   });
 
-  const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
-    if (response.status !== 'ok') {
-      const { id } = response.data;
-      console.log(response.data);
-      dispatch(channelsActions.setCurrentChannelId(id));
-    } else {
-      console.log(response.status);
-    }
-    // return null;
-  });
+  const addNewChannel = (channel) =>
+    socket.emit('newChannel', channel, (response) => {
+      if (response.status !== 'ok') {
+        const { id } = response.data;
+        console.log(response.data);
+        dispatch(channelsActions.setCurrentChannelId(id));
+      } else {
+        console.log(response.status);
+      }
+      // return null;
+    });
 
   socket.on('newChannel', (payload) => {
     dispatch(channelsActions.addChannel(payload));
   });
 
-  const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
-    if (response.status !== 'ok') {
-      console.log(response.status);
-    }
-  });
+  const removeChannel = (id) =>
+    socket.emit('removeChannel', { id }, (response) => {
+      if (response.status !== 'ok') {
+        console.log(response.status);
+      }
+    });
 
   socket.on('removeChannel', (payload) => {
     dispatch(channelsActions.removeChannel(payload));
@@ -54,11 +58,12 @@ const SocketProvider = ({ socket, children }) => {
     }
   });
 
-  const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
-    if (response.status !== 'ok') {
-      console.log(response.status);
-    }
-  });
+  const renameChannel = (renamedChannel) =>
+    socket.emit('renameChannel', renamedChannel, (response) => {
+      if (response.status !== 'ok') {
+        console.log(response.status);
+      }
+    });
 
   socket.on('renameChannel', (payload) => {
     const { name, id } = payload;
@@ -86,6 +91,11 @@ const SocketProvider = ({ socket, children }) => {
   );
 };
 
+const rollbarConfig = {
+  accessToken: '02cd77972a264dbb9c9981c6b8f12537',
+  environment: 'testenv',
+};
+
 const init = async (socket) => {
   const i18n = i18next.createInstance();
 
@@ -95,13 +105,17 @@ const init = async (socket) => {
   });
 
   const vdom = (
-    <StoreProvider store={store}>
-      <SocketProvider socket={socket}>
-        <I18nextProvider i18n={i18n}>
-          <App />
-        </I18nextProvider>
-      </SocketProvider>
-    </StoreProvider>
+    <Provider config={rollbarConfig}>
+      <ErrorBoundary>
+        <StoreProvider store={store}>
+          <SocketProvider socket={socket}>
+            <I18nextProvider i18n={i18n}>
+              <App />
+            </I18nextProvider>
+          </SocketProvider>
+        </StoreProvider>
+      </ErrorBoundary>
+    </Provider>
   );
 
   return vdom;
