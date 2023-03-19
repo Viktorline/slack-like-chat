@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
 
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { useSocket } from '../../hooks/index.js';
@@ -12,6 +13,7 @@ const Rename = (props) => {
   const { onHide, id } = props;
   const inputEl = useRef();
   const chat = useSocket();
+  const { t } = useTranslation();
 
   const channels = useSelector(channelsSelectors.selectAll);
   const currentChannel = channels.find((channel) => channel.id === id);
@@ -20,13 +22,13 @@ const Rename = (props) => {
     name: yup
       .string()
       .trim()
-      .min(3, 'min 3 max 20 letters')
-      .max(20, 'min 3 max 20 letters')
+      .min(3, t('modal.yup.min'))
+      .max(20, t('modal.yup.max'))
       .notOneOf(
         channels.map((channel) => channel.name),
-        'channel already exists',
+        t('modal.yup.exist'),
       )
-      .required('required'),
+      .required(t('modal.yup.required')),
   });
 
   const formik = useFormik({
@@ -48,7 +50,7 @@ const Rename = (props) => {
   return (
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Rename Channel</Modal.Title>
+        <Modal.Title>{t('modal.rename.header')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -63,15 +65,15 @@ const Rename = (props) => {
             isInvalid={formik.errors.name && formik.touched.name}
           />
           <Form.Label htmlFor="name" className="visually-hidden">
-            Name
+            {t('modal.rename.name')}
           </Form.Label>
           <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
           <div className="d-flex justify-content-end">
             <Button type="submit" variant="primary" className="me-2">
-              Rename
+              {t('modal.rename.rename')}
             </Button>
             <Button variant="secondary" onClick={onHide}>
-              Cancel
+              {t('modal.rename.cancel')}
             </Button>
           </div>
         </Form>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { useAuth } from '../hooks/index.js';
 
@@ -14,6 +15,7 @@ const Login = () => {
   const [authFailed, setAuthFailed] = useState(false);
   const inputRef = useRef();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -24,17 +26,18 @@ const Login = () => {
       username: '',
       password: '',
     },
+
     validationSchema: Yup.object().shape({
       username: Yup.string()
         .trim()
-        .required('Username is required')
-        .min(3, '3 symbols min')
-        .max(40, '40 symbols max'),
+        .required(t('yupValidation.userRequired'))
+        .min(3, t('yupValidation.userMin'))
+        .max(40, t('yupValidation.userMax')),
       password: Yup.string()
         .trim()
-        .required('Password is required')
-        .min(5, 'Password 5 symbols min')
-        .max(50, 'Password 50 symbols max'),
+        .required(t('yupValidation.passwordRequired'))
+        .min(5, t('yupValidation.passwordMin'))
+        .max(50, t('yupValidation.passwordMax')),
     }),
 
     onSubmit: async (values) => {
@@ -59,7 +62,7 @@ const Login = () => {
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
-                <h1 className="text-center mb-4">Login Page</h1>
+                <h1 className="text-center mb-4">{t('loginPage.header')}</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
                     onChange={formik.handleChange}
@@ -68,12 +71,12 @@ const Login = () => {
                     name="username"
                     autoComplete="username"
                     required=""
-                    placeholder="Username"
+                    placeholder={t('username')}
                     id="username"
                     isInvalid={(formik.touched.username && !!formik.errors.username) || authFailed}
                     ref={inputRef}
                   />
-                  <Form.Label htmlFor="username">Username</Form.Label>
+                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
                     {formik.errors.username}
                   </Form.Control.Feedback>
@@ -86,18 +89,18 @@ const Login = () => {
                     name="password"
                     autoComplete="current-password"
                     required=""
-                    placeholder="Password"
+                    placeholder={t('password')}
                     type="password"
                     id="password"
                     isInvalid={(formik.touched.password && !!formik.errors.password) || authFailed}
                   />
-                  <Form.Label htmlFor="password">Password</Form.Label>
+                  <Form.Label htmlFor="password">{t('password')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
                     {formik.errors.password}
                   </Form.Control.Feedback>
                   {authFailed && (
                     <Form.Control.Feedback type="invalid" tooltip placement="right">
-                      Invalid username or password
+                      {t('loginPage.authFailed')}
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
@@ -107,11 +110,11 @@ const Login = () => {
                   variant="outline-primary"
                   className="w-100 mb-3"
                 >
-                  Submit
+                  {t('loginPage.submit')}
                 </Button>
                 <div>
                   <div className="text-center">
-                    <a href="/registration">Registration</a>
+                    <a href="/registration">{t('loginPage.registration')}</a>
                   </div>
                 </div>
               </Form>

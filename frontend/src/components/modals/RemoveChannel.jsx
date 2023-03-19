@@ -1,31 +1,31 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useSocket } from '../../hooks/index.js';
 
 const Remove = (props) => {
   const { onHide, id } = props;
   const chat = useSocket();
+  const { t } = useTranslation();
 
   const handleRemove = (channelId) => {
     chat.removeChannel(channelId);
     onHide();
   };
 
-  console.log(id);
-
   return (
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Delete channel</Modal.Title>
+        <Modal.Title>{t('modal.remove.header')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="lead">Sure?</p>
+        <p className="lead">{t('modal.remove.sure')}</p>
         <div className="d-flex justify-content-end">
           <Button className="me-2" type="submit" variant="danger" onClick={() => handleRemove(id)}>
-            Delete
+            {t('modal.remove.delete')}
           </Button>
           <Button variant="secondary" onClick={onHide}>
-            Cancel
+            {t('modal.remove.cancel')}
           </Button>
         </div>
       </Modal.Body>

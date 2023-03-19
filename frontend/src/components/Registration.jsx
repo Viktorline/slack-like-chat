@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -13,6 +14,7 @@ const RegistrationPage = () => {
   const [registrationFailed, setRegistrationFailed] = useState(false);
   const inputRef = useRef();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -21,14 +23,15 @@ const RegistrationPage = () => {
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .trim()
-      .required('Username is required')
-      .min(3, '3 symbols min')
-      .max(40, '40 symbols max'),
+      .required(t('yupValidation.userRequired'))
+      .min(3, t('yupValidation.userMin'))
+      .max(40, t('yupValidation.userMax')),
     password: Yup.string()
-      .required('Password is required')
-      .min(5, 'Password 5 symbols min')
-      .max(50, 'Password 50 symbols max'),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match'),
+      .trim()
+      .required(t('yupValidation.passwordRequired'))
+      .min(5, t('yupValidation.passwordMin'))
+      .max(50, t('yupValidation.passwordMax')),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password')], t('yupValidation.mustMatch')),
   });
 
   const formik = useFormik({
@@ -66,13 +69,15 @@ const RegistrationPage = () => {
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
               <Form onSubmit={formik.handleSubmit} className="w-50">
-                <h1 className="text-center mb-4">Registration</h1>
+                <h1 className="text-center mb-4">{t('registrationPage.header')}</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.username}
-                    placeholder="min 3 max 20 letters"
+                    placeholder={
+                      `${t('registrationPage.userMin')} ${t('registrationPage.userMax')}`
+                    }
                     name="username"
                     id="username"
                     autoComplete="username"
@@ -82,7 +87,7 @@ const RegistrationPage = () => {
                     required
                     ref={inputRef}
                   />
-                  <Form.Label htmlFor="username">Username</Form.Label>
+                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
                     {formik.errors.username}
                   </Form.Control.Feedback>
@@ -93,7 +98,9 @@ const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
-                    placeholder="min 6 symbols"
+                    placeholder={
+                      `${t('registrationPage.passwordMin')} ${t('registrationPage.passwordMax')}`
+                    }
                     name="password"
                     id="password"
                     aria-describedby="passwordHelpBlock"
@@ -106,7 +113,7 @@ const RegistrationPage = () => {
                   <Form.Control.Feedback type="invalid" tooltip>
                     {formik.errors.password}
                   </Form.Control.Feedback>
-                  <Form.Label htmlFor="password">Password</Form.Label>
+                  <Form.Label htmlFor="password">{t('password')}</Form.Label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
@@ -114,7 +121,7 @@ const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.confirmPassword}
-                    placeholder="Passwords must match"
+                    placeholder={t('yupValidation.mustMatch')}
                     name="confirmPassword"
                     id="confirmPassword"
                     isInvalid={
@@ -126,13 +133,13 @@ const RegistrationPage = () => {
                   />
                   <Form.Control.Feedback type="invalid" tooltip>
                     {registrationFailed
-                      ? 'this user already exists'
+                      ? t('registrationPage.alreadyExists')
                       : formik.errors.confirmPassword}
                   </Form.Control.Feedback>
-                  <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
+                  <Form.Label htmlFor="confirmPassword">{t('registrationPage.confirm')}</Form.Label>
                 </Form.Group>
                 <Button type="submit" variant="outline-primary" className="w-100">
-                  Register
+                  {t('registrationPage.register')}
                 </Button>
               </Form>
             </div>

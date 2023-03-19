@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button, ButtonGroup, Col, Dropdown, Nav,
@@ -16,6 +17,7 @@ const Channels = (props) => {
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const channelsRender = () => {
     const handleClick = (id) => {
@@ -44,15 +46,15 @@ const Channels = (props) => {
                   variant={channel.id === currentChannelId ? 'secondary' : 'light'}
                   className="flex-grow-0 text-end"
                 >
-                  <span className="visually-hidden">controls</span>
+                  <span className="visually-hidden">{t('channels.controls')}</span>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={() => showModal('removeChannel', channel.id)}>
-                    Delete
+                    {t('channels.remove')}
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => showModal('renameChannel', channel.id)}>
-                    Rename
+                    {t('channels.rename')}
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -77,7 +79,10 @@ const Channels = (props) => {
   return (
     <Col className="col-4 col-md-2 border-end pt-3 px-0 bg-light">
       <div className="d-flex justify-content-between align-items-center mb-3 ps-4 pe-2">
-        <span>Channels</span>
+        <span>
+          {' '}
+          {t('channels.channels')}
+        </span>
         <Button
           onClick={() => showModal('addNewChannel')}
           variant="outline-primary"

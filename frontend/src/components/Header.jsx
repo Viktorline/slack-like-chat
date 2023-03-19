@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Container, Navbar } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
 import { useAuth } from '../hooks/index.js';
 
 const Header = () => {
   const auth = useAuth();
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Navbar className="shadow-sm navbar-expand-lg navbar-light bg-white">
@@ -26,7 +27,7 @@ const Header = () => {
               auth.logOut();
             }}
           >
-            {isHovered ? 'Logout?' : auth.user.username}
+            {isHovered ? t('logout') : auth.user.username}
           </Button>
         ) : null}
       </Container>

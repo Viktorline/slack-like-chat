@@ -63,7 +63,7 @@ const SocketProvider = ({ socket, children }) => {
   socket.on('renameChannel', (payload) => {
     const { name, id } = payload;
     dispatch(
-      channelsActions.changeChannelName({
+      channelsActions.renameChannel({
         id,
         changes: {
           name,

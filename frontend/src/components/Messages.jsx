@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 
@@ -8,15 +9,12 @@ import { useAuth, useSocket } from '../hooks/index.js';
 import { selectors as channelsSelectors } from '../slices/channelsSlice.js';
 import { selectors as messagesSelectors } from '../slices/messagesSlice.js';
 
-// axios.post('/api/v1/signup', { username: 'newuser', password: '123456' }).then((response) => {
-//   console.log(response.data);
-// });
-
 const Messages = () => {
   const inputRef = useRef();
   const lastMessageRef = useRef();
   const auth = useAuth();
   const chat = useSocket();
+  const { t } = useTranslation();
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = useSelector(
@@ -86,7 +84,7 @@ const Messages = () => {
           <span className="text-muted">
             {currentMessages.length}
             {' '}
-            messages
+            {t('messages.messages')}
           </span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
@@ -99,8 +97,8 @@ const Messages = () => {
               <Form.Control
                 onChange={formik.handleChange}
                 name="body"
-                aria-label="New message"
-                placeholder="Type Message..."
+                aria-label={t('messages.new')}
+                placeholder={t('messages.type')}
                 className="border-0 p-0 ps-2 form-control"
                 value={formik.values.body}
                 ref={inputRef}
@@ -112,7 +110,7 @@ const Messages = () => {
                 className="btn-group-vertical"
                 disabled={formik.errors.body || !formik.values.body}
               >
-                <span>Send</span>
+                <span>{t('messages.send')}</span>
               </Button>
             </InputGroup>
           </Form>

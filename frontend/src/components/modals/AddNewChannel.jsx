@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
@@ -10,6 +11,7 @@ const Add = (props) => {
   const { onHide } = props;
   const inputEl = useRef();
   const chat = useSocket();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -20,13 +22,13 @@ const Add = (props) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .trim()
-      .min(3, 'min 3 letters')
-      .max(20, 'max 20 letters')
+      .min(3, t('modal.yup.min'))
+      .max(20, t('modal.yup.max'))
       .notOneOf(
         channels.map((channel) => channel.name),
-        'channel already exists',
+        t('modal.yup.exist'),
       )
-      .required('required'),
+      .required(t('modal.yup.required')),
   });
 
   const formik = useFormik({
@@ -46,7 +48,7 @@ const Add = (props) => {
   return (
     <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Add new channel</Modal.Title>
+        <Modal.Title>{t('modal.add.header')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -61,15 +63,15 @@ const Add = (props) => {
             isInvalid={formik.errors.name && formik.touched.name}
           />
           <Form.Label htmlFor="name" className="visually-hidden">
-            Channel&apos;s name
+            {t('modal.add.name')}
           </Form.Label>
           <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
           <div className="d-flex justify-content-end">
             <Button className="me-2" type="submit" variant="primary">
-              Create
+              {t('modal.add.create')}
             </Button>
             <Button variant="secondary" onClick={onHide}>
-              Cancel
+              {t('modal.add.cancel')}
             </Button>
           </div>
         </Form>
