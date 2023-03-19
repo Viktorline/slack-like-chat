@@ -108,6 +108,7 @@ const Messages = () => {
                 value={formik.values.body}
                 ref={inputRef}
                 disabled={formik.isSubmitting}
+                autoComplete="off"
               />
               <Button
                 type="submit"
