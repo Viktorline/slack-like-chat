@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useAuth } from '../hooks/index.js';
-
 import routes from '../routes.js';
 
 const Login = () => {
@@ -48,9 +47,18 @@ const Login = () => {
         console.log(data);
         navigate('/');
       } catch (err) {
-        setAuthFailed(true);
-        inputRef.current.select();
         console.log(err);
+        if (err.isAxiosError) {
+          if (err.response.status === 401) {
+            setAuthFailed(true);
+            inputRef.current.select();
+          } else {
+            toast.error(t('errors.network'));
+          }
+        } else {
+          toast.error(t('errors.unknown'));
+          throw err;
+        }
       }
     },
   });

@@ -1,11 +1,10 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import * as yup from 'yup';
-
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
+import { toast } from 'react-toastify';
+import * as yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
 
@@ -39,6 +38,7 @@ const Rename = (props) => {
     onSubmit: (values) => {
       const { name } = values;
       chat.renameChannel(id, name);
+      toast.success(t('modal.rename.success'));
       onHide();
     },
   });

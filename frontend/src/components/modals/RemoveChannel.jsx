@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useSocket } from '../../hooks/index.js';
 
 const Remove = (props) => {
@@ -10,6 +11,7 @@ const Remove = (props) => {
 
   const handleRemove = (channelId) => {
     chat.removeChannel(channelId);
+    toast.success(t('modal.remove.success'));
     onHide();
   };
 

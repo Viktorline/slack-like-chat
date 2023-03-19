@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
@@ -41,6 +42,7 @@ const Add = (props) => {
       console.log(channels);
 
       chat.addNewChannel(values);
+      toast.success(t('modal.add.success'));
       onHide();
     },
   });

@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-
 import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
 
@@ -52,12 +52,18 @@ const RegistrationPage = () => {
         auth.logIn(response.data);
         navigate('/');
       } catch (err) {
-        if (err.response.status === 409) {
-          setRegistrationFailed(true);
-          inputRef.current.select();
-        }
         console.log(err);
-        throw err;
+        if (err.isAxiosError) {
+          if (err.response.status === 409) {
+            setRegistrationFailed(true);
+            inputRef.current.select();
+          } else {
+            toast.error(t('errors.network'));
+          }
+        } else {
+          toast.error(t('errors.unknown'));
+          throw err;
+        }
       }
     },
   });
@@ -75,9 +81,9 @@ const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.username}
-                    placeholder={
-                      `${t('registrationPage.userMin')} ${t('registrationPage.userMax')}`
-                    }
+                    placeholder={`${t('registrationPage.userMin')} ${t(
+                      'registrationPage.userMax',
+                    )}`}
                     name="username"
                     id="username"
                     autoComplete="username"
@@ -98,9 +104,9 @@ const RegistrationPage = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
-                    placeholder={
-                      `${t('registrationPage.passwordMin')} ${t('registrationPage.passwordMax')}`
-                    }
+                    placeholder={`${t('registrationPage.passwordMin')} ${t(
+                      'registrationPage.passwordMax',
+                    )}`}
                     name="password"
                     id="password"
                     aria-describedby="passwordHelpBlock"
