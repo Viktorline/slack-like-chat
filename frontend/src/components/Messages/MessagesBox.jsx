@@ -17,10 +17,6 @@ const Messages = () => {
   const chat = useSocket();
   const { t } = useTranslation();
 
-  leoProfanity.clearList();
-  leoProfanity.add(leoProfanity.getDictionary('en'));
-  leoProfanity.add(leoProfanity.getDictionary('ru'));
-
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = useSelector(
     (state) => channelsSelectors.selectById(state, currentChannelId),

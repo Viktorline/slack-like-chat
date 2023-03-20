@@ -149,6 +149,11 @@ const RegistrationPage = () => {
                 </Button>
               </Form>
             </div>
+            <div className="card-footer p-4">
+              <div className="text-center">
+                <a href="/login">{t('login')}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

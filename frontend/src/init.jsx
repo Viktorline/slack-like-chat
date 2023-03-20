@@ -3,6 +3,7 @@ import i18next from 'i18next';
 import React from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider as StoreProvider, useDispatch, useSelector } from 'react-redux';
+import leoProfanity from 'leo-profanity';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
 import resources from './locales/index.js';
@@ -97,6 +98,10 @@ const init = async (socket) => {
     resources,
     fallbackLng: 'ru',
   });
+
+  leoProfanity.clearList();
+  leoProfanity.add(leoProfanity.getDictionary('en'));
+  leoProfanity.add(leoProfanity.getDictionary('ru'));
 
   const vdom = (
     <Provider config={rollbarConfig}>

@@ -64,6 +64,7 @@ const Rename = (props) => {
             name="name"
             value={formik.values.name}
             isInvalid={formik.errors.name && formik.touched.name}
+            autoComplete="off"
           />
           <Form.Label htmlFor="name" className="visually-hidden">
             {t('modal.rename.name')}
