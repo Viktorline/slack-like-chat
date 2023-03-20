@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   actions as channelsActions,
   selectors as channelsSelectors,
-} from '../slices/channelsSlice.js';
+} from '../../slices/channelsSlice.js';
 
 const Channels = (props) => {
   const { showModal } = props;

@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
 
-import Channels from './Channels.jsx';
-import Messages from './Messages.jsx';
+import Channels from './Channels/Channels.jsx';
+import Messages from './Messages/MessagesBox.jsx';
 import getModal from './modals/index.js';
 
 import { actions as channelsActions } from '../slices/channelsSlice.js';
