@@ -1,27 +1,20 @@
 export default {
   translation: {
     login: 'Login',
-    logout: 'Logout',
+    logout: 'Logout?',
 
     username: 'Username',
     password: 'Password',
+    inputRequrements: '3 to 20 symbols',
 
     yupValidation: {
       userRequired: 'Username is required',
-      userMin: 'At least 3 characters',
-      userMax: 'Maximum 40 characters',
-
       passwordRequired: 'Password is required',
-      passwordMin: 'At least 5 characters',
-      passwordMax: 'Maximum 50 characters',
-
       mustMatch: 'Passwords must match',
     },
 
     modal: {
       yup: {
-        min: 'At least 3 characters',
-        max: 'Maximum 20 characters',
         exist: 'This channel already exists',
         required: 'Required field',
       },
@@ -31,6 +24,7 @@ export default {
         name: 'Channel name',
         create: 'Create',
         cancel: 'Cancel',
+        success: 'Channel created',
       },
 
       remove: {
@@ -38,6 +32,7 @@ export default {
         sure: 'Are you sure? This action cannot be undone',
         delete: 'Delete',
         cancel: 'Cancel',
+        success: 'Сhannel removed',
       },
 
       rename: {
@@ -45,6 +40,7 @@ export default {
         name: 'Name',
         rename: 'Rename',
         cancel: 'Cancel',
+        success: 'Сhannel renamed',
       },
     },
 
@@ -57,7 +53,6 @@ export default {
 
     registrationPage: {
       header: 'Registration',
-
       confirm: 'Confirm password',
       register: 'Register',
       alreadyExists: 'This user already exists',
@@ -79,6 +74,11 @@ export default {
       type: 'Type a message...',
       new: 'New message',
       send: 'Send',
+    },
+
+    errors: {
+      network: 'Connection error',
+      unknown: 'Unknown error',
     },
   },
 };

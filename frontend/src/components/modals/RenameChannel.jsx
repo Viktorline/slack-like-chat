@@ -22,8 +22,8 @@ const Rename = (props) => {
     name: yup
       .string()
       .trim()
-      .min(3, t('modal.yup.min'))
-      .max(20, t('modal.yup.max'))
+      .min(3, t('inputRequirements'))
+      .max(20, t('inputRequirements'))
       .notOneOf(
         channels.map((channel) => channel.name),
         t('modal.yup.exist'),

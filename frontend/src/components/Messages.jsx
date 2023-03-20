@@ -31,7 +31,7 @@ const Messages = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  });
+  }, []);
 
   useEffect(() => {
     lastMessageRef.current.scrollIntoView({

@@ -18,7 +18,6 @@ const SocketProvider = ({ socket, children }) => {
     if (response.status !== 'ok') {
       console.log(response.status);
     }
-    // return null;
   });
 
   socket.on('newMessage', (payload) => {
@@ -33,7 +32,6 @@ const SocketProvider = ({ socket, children }) => {
     } else {
       console.log(response.status);
     }
-    // return null;
   });
 
   socket.on('newChannel', (payload) => {
@@ -92,11 +90,6 @@ const rollbarConfig = {
   environment: 'testenv',
 };
 
-function TestError() {
-  const a = null;
-  return a.hello();
-}
-
 const init = async (socket) => {
   const i18n = i18next.createInstance();
 
@@ -112,7 +105,6 @@ const init = async (socket) => {
           <SocketProvider socket={socket}>
             <I18nextProvider i18n={i18n}>
               <App />
-              <TestError />
             </I18nextProvider>
           </SocketProvider>
         </StoreProvider>

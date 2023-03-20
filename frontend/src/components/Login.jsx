@@ -30,13 +30,13 @@ const Login = () => {
       username: Yup.string()
         .trim()
         .required(t('yupValidation.userRequired'))
-        .min(3, t('yupValidation.userMin'))
-        .max(40, t('yupValidation.userMax')),
+        .min(3, t('inputRequirements'))
+        .max(20, t('inputRequirements')),
       password: Yup.string()
         .trim()
         .required(t('yupValidation.passwordRequired'))
-        .min(5, t('yupValidation.passwordMin'))
-        .max(50, t('yupValidation.passwordMax')),
+        .min(3, t('inputRequirements'))
+        .max(20, t('inputRequirements')),
     }),
 
     onSubmit: async (values) => {

@@ -5,23 +5,16 @@ export default {
 
     username: 'Логин',
     password: 'Пароль',
+    inputRequirements: 'От 3 до 20 символов',
 
     yupValidation: {
       userRequired: 'Требуется имя пользователя',
-      userMin: 'минимум 3 символа',
-      userMax: 'максимум 40 символов',
-
       passwordRequired: 'Требуется пароль',
-      passwordMin: 'минимум 5 символов',
-      passwordMax: 'максимум 50 символов',
-
       mustMatch: 'Пароли должны совпадать',
     },
 
     modal: {
       yup: {
-        min: 'минимум 3 символа',
-        max: 'максимум 20 символов',
         exist: 'Такой канал уже существует',
         required: 'Обязательное поле',
       },
@@ -39,7 +32,7 @@ export default {
         sure: 'Уверены? Это действие нельзя отменить',
         delete: 'Удалить',
         cancel: 'Отменить',
-        success: 'Канал удален',
+        success: 'Канал удалён',
       },
 
       rename: {
@@ -60,7 +53,6 @@ export default {
 
     registrationPage: {
       header: 'Регистрация',
-
       confirm: 'Подтвердите пароль',
       register: 'Зарегистрироваться',
       alreadyExists: 'Такой пользователь уже существует',
@@ -85,7 +77,7 @@ export default {
     },
 
     errors: {
-      network: 'Ошибка сети',
+      network: 'Ошибка соединения',
       unknown: 'Неизвестная ошибка',
     },
   },
