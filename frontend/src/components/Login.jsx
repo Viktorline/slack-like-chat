@@ -27,16 +27,8 @@ const Login = () => {
     },
 
     validationSchema: Yup.object().shape({
-      username: Yup.string()
-        .trim()
-        .required(t('yupValidation.userRequired'))
-        .min(3, t('inputRequirements'))
-        .max(20, t('inputRequirements')),
-      password: Yup.string()
-        .trim()
-        .required(t('yupValidation.passwordRequired'))
-        .min(5, t('passwordRequirements'))
-        .max(20, t('inputRequirements')),
+      username: Yup.string().trim().required(t('yupValidation.userRequired')),
+      password: Yup.string().trim().required(t('yupValidation.passwordRequired')),
     }),
 
     onSubmit: async (values) => {

@@ -132,8 +132,8 @@ const RegistrationPage = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     isInvalid={
-                      (formik.errors.confirmPassword && formik.touched.confirmPassword) ||
-                      registrationFailed
+                      (formik.errors.confirmPassword && formik.touched.confirmPassword)
+                      || registrationFailed
                     }
                     required
                     autoComplete="new-password"
