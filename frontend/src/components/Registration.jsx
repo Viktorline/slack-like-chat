@@ -30,7 +30,7 @@ const RegistrationPage = () => {
     password: Yup.string()
       .trim()
       .required(t('yupValidation.passwordRequired'))
-      .min(3, t('inputRequirements'))
+      .min(6, t('passwordRequirements'))
       .max(20, t('inputRequirements')),
     confirmPassword: Yup.string().oneOf([Yup.ref('password')], t('yupValidation.mustMatch')),
   });
