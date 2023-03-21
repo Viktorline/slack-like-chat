@@ -69,7 +69,7 @@ const Login = () => {
         <div className="col-12 col-md-8 col-xxl-6">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
-              <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
+              <Form onSubmit={formik.handleSubmit} className="w-50">
                 <h1 className="text-center mb-4">{t('loginPage.header')}</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
@@ -120,12 +120,12 @@ const Login = () => {
                 >
                   {t('loginPage.submit')}
                 </Button>
-                <div>
-                  <div className="text-center">
-                    <a href="/registration">{t('loginPage.registration')}</a>
-                  </div>
-                </div>
               </Form>
+            </div>
+            <div className="card-footer p-4">
+              <div className="text-center">
+                <a href="/registration">{t('loginPage.registration')}</a>
+              </div>
             </div>
           </div>
         </div>
