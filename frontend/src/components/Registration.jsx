@@ -144,7 +144,12 @@ const RegistrationPage = () => {
                   </Form.Control.Feedback>
                   <Form.Label htmlFor="confirmPassword">{t('registrationPage.confirm')}</Form.Label>
                 </Form.Group>
-                <Button type="submit" variant="outline-primary" className="w-100">
+                <Button
+                  disabled={!formik.isValid}
+                  type="submit"
+                  variant="outline-primary"
+                  className="w-100"
+                >
                   {t('registrationPage.register')}
                 </Button>
               </Form>
