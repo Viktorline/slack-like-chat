@@ -40,7 +40,7 @@ export default {
 
       rename: {
         header: 'Переименовать канал',
-        name: 'Имя',
+        name: 'Имя канала',
         rename: 'Переименовать',
         cancel: 'Отменить',
         success: 'Канал переименован',
