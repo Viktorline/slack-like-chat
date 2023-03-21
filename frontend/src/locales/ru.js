@@ -1,5 +1,8 @@
 export default {
   translation: {
+    ru: 'Русский',
+    en: 'English',
+
     login: 'Войти',
     logout: 'Выйти?',
 
