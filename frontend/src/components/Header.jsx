@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <Navbar className="shadow-sm navbar-expand-lg navbar-light bg-white">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/login">
           Hexlet Chat
         </Navbar.Brand>
         {auth.user ? (
