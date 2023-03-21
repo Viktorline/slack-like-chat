@@ -23,9 +23,9 @@ const App = () => (
       <div className="d-flex flex-column vh-100">
         <Header />
         <Routes>
-          <Route path="" element={<LoginRoute />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="login" element={<Login />} />
+          <Route path="/" element={<LoginRoute />} />
+          <Route path="/signup" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

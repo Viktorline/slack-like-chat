@@ -124,7 +124,7 @@ const Login = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <a href="/registration">{t('loginPage.registration')}</a>
+                <a href="/signup">{t('loginPage.registration')}</a>
               </div>
             </div>
           </div>
