@@ -6,7 +6,7 @@ export default {
     login: 'Войти',
     logout: 'Выйти?',
 
-    username: 'Имя пользователя',
+    username: 'Ваш ник',
     password: 'Пароль',
     inputRequirements: 'От 3 до 20 символов',
     passwordRequirements: 'Не менее 6 символов',

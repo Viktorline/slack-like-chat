@@ -35,7 +35,7 @@ const Login = () => {
       password: Yup.string()
         .trim()
         .required(t('yupValidation.passwordRequired'))
-        .min(6, t('passwordRequirements'))
+        .min(5, t('passwordRequirements'))
         .max(20, t('inputRequirements')),
     }),
 

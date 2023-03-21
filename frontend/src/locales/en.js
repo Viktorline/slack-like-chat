@@ -9,6 +9,7 @@ export default {
     username: 'Username',
     password: 'Password',
     inputRequrements: '3 to 20 symbols',
+    passwordRequirements: 'At least 6 symbols',
 
     yupValidation: {
       userRequired: 'Username is required',
