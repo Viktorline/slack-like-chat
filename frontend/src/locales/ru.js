@@ -6,7 +6,6 @@ export default {
     login: 'Войти',
     logout: 'Выйти?',
 
-    username: 'Ваш ник',
     password: 'Пароль',
     inputRequirements: 'От 3 до 20 символов',
     passwordRequirements: 'Не менее 6 символов',
@@ -49,6 +48,7 @@ export default {
     },
 
     loginPage: {
+      username: 'Ваш ник',
       header: 'Авторизация',
       submit: 'Войти',
       registration: 'Регистрация',
@@ -56,6 +56,7 @@ export default {
     },
 
     registrationPage: {
+      username: 'Имя пользователя',
       header: 'Регистрация',
       confirm: 'Подтвердите пароль',
       register: 'Зарегистрироваться',

@@ -6,7 +6,6 @@ export default {
     login: 'Login',
     logout: 'Logout?',
 
-    username: 'Username',
     password: 'Password',
     inputRequrements: '3 to 20 symbols',
     passwordRequirements: 'At least 6 symbols',
@@ -49,6 +48,7 @@ export default {
     },
 
     loginPage: {
+      username: 'Your nickname',
       header: 'Login',
       submit: 'Submit',
       registration: 'Registration',
@@ -56,6 +56,7 @@ export default {
     },
 
     registrationPage: {
+      username: 'Username',
       header: 'Registration',
       confirm: 'Confirm password',
       register: 'Register',

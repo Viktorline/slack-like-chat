@@ -84,7 +84,7 @@ const Login = () => {
                     isInvalid={(formik.touched.username && !!formik.errors.username) || authFailed}
                     ref={inputRef}
                   />
-                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
+                  <Form.Label htmlFor="username">{t('loginPage.username')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
                     {formik.errors.username}
                   </Form.Control.Feedback>

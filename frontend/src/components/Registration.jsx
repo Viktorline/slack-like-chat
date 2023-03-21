@@ -94,7 +94,7 @@ const RegistrationPage = () => {
                     required
                     ref={inputRef}
                   />
-                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
+                  <Form.Label htmlFor="username">{t('registrationPage.username')}</Form.Label>
                   <Form.Control.Feedback type="invalid" tooltip placement="right">
                     {formik.errors.username}
                   </Form.Control.Feedback>
@@ -132,8 +132,8 @@ const RegistrationPage = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     isInvalid={
-                      (formik.errors.confirmPassword && formik.touched.confirmPassword)
-                      || registrationFailed
+                      (formik.errors.confirmPassword && formik.touched.confirmPassword) ||
+                      registrationFailed
                     }
                     required
                     autoComplete="new-password"
