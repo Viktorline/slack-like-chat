@@ -12,6 +12,7 @@ import routes from '../routes.js';
 const RegistrationPage = () => {
   const auth = useAuth();
   const [registrationFailed, setRegistrationFailed] = useState(false);
+
   const inputRef = useRef();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -145,7 +146,7 @@ const RegistrationPage = () => {
                   <Form.Label htmlFor="confirmPassword">{t('registrationPage.confirm')}</Form.Label>
                 </Form.Group>
                 <Button
-                  disabled={!formik.isValid}
+                  disabled={!formik.dirty}
                   type="submit"
                   variant="outline-primary"
                   className="w-100"
