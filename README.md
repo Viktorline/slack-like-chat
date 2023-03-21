@@ -5,3 +5,11 @@
 ### Link
 
 https://frontend-project-12-production-e15c.up.railway.app/
+
+### Technologies:
+
+- React
+- Redux (reduxjs/toolkit)
+- WebSocket
+- React Router DOM
+- React Bootstrap
