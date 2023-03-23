@@ -19,7 +19,7 @@ const Channel = (props) => {
   };
 
   return (
-    <Nav.Item as="li" key={channel.id} className="w-100">
+    <Nav.Item key={channel.id} className="w-100">
       {channel.removable ? (
         <Dropdown as={ButtonGroup} className="w-100">
           <button
@@ -54,7 +54,7 @@ const Channel = (props) => {
         <button
           type="button"
           onClick={() => handleClick(channel.id)}
-          className={cn('w-100', 'rounded-0', 'text-start', 'text-truncate', 'btn', {
+          className={cn('w-100', 'rounded-2', 'text-start', 'text-truncate', 'btn', {
             'btn-secondary': channel.id === currentChannelId,
           })}
         >

@@ -80,7 +80,7 @@ const Messages = () => {
             {t('messages.messages')}
           </span>
         </div>
-        <div id="messages-box" className="chat-messages overflow-auto px-5 d-flex flex-column">
+        <div className="overflow-auto px-5 d-flex flex-column">
           {messagesRender()}
           <span ref={lastMessageRef} />
         </div>

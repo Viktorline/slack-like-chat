@@ -12,8 +12,8 @@ const Channels = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Col className="col-4 col-md-2 border-end pt-3 px-0 bg-light">
-      <div className="d-flex justify-content-between align-items-center mb-3 ps-4 pe-2">
+    <Col className="col-4 col-md-2 border-end pt-3 px-0 bg-light h-100 overflow-auto">
+      <div className="d-flex justify-content-between align-items-center mb-3 ps-4 pe-2 ">
         <span>
           {' '}
           {t('channels.channels')}
@@ -26,7 +26,7 @@ const Channels = (props) => {
           <span className="font-weight-bold">+</span>
         </Button>
       </div>
-      <Nav fill variant="pills" className="d-flex flex-column px-2" as="ul">
+      <Nav variant="pills" className="d-flex flex-column px-2">
         {channels.length > 0
           && channels.map((channel) => (
             <Channel key={channel.id} channel={channel} showModal={showModal} />
