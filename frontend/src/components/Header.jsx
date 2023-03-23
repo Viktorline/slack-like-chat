@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Container, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
+import {
+  Button, ButtonGroup, Container, Dropdown, DropdownButton, Navbar,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/index.js';
@@ -46,7 +48,8 @@ const Header = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={() => {
-                  auth.logOut(), handleMouseLeave();
+                  auth.logOut();
+                  handleMouseLeave();
                 }}
                 style={{ minWidth: '90px' }}
               >
