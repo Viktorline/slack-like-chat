@@ -21,11 +21,10 @@
 
 🔧 To install and use this application, you will need to have latest Node.js installed on your computer. Here are the steps:
 
-1. Fork this repository
-2. Clone the repository to your computer
-3. Navigate to the project directory
-4. Run `npm install` to install dependencies
-5. Run `make start` to start the development server and app
+1. git clone https://github.com/Viktorline/frontend-project-12.git
+2. Navigate to the project directory
+3. Run `npm install` to install dependencies
+4. Run `make start` to start the development server and app
 
 ## Link ⤵️
 
