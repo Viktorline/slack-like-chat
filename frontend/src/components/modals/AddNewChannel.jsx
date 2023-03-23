@@ -3,14 +3,16 @@ import leoProfanity from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
 
-const Add = (props) => {
-  const { onHide } = props;
+const Add = () => {
+  const dispatch = useDispatch();
   const inputEl = useRef();
   const chat = useSocket();
   const { t } = useTranslation();
@@ -39,19 +41,17 @@ const Add = (props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      console.log(channels);
-
       const cleanedName = leoProfanity.clean(values.name);
       chat.addNewChannel({ name: cleanedName });
+
       toast.success(t('modal.add.success'));
-      onHide();
+      dispatch(modalsActions.hideModal());
     },
   });
 
   return (
     <Modal show centered>
-      <Modal.Header closeButton onHide={onHide}>
+      <Modal.Header closeButton onHide={() => dispatch(modalsActions.hideModal())}>
         <Modal.Title>{t('modal.add.header')}</Modal.Title>
       </Modal.Header>
 
@@ -75,7 +75,7 @@ const Add = (props) => {
             <Button className="me-2" type="submit" variant="primary">
               {t('modal.add.create')}
             </Button>
-            <Button variant="secondary" onClick={onHide}>
+            <Button variant="secondary" onClick={() => dispatch(modalsActions.hideModal())}>
               {t('modal.add.cancel')}
             </Button>
           </div>

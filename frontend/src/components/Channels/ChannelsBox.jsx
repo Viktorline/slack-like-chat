@@ -2,13 +2,15 @@ import React from 'react';
 
 import { Button, Col, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
 import Channel from './Channel.jsx';
 
-const Channels = (props) => {
-  const { showModal } = props;
+const Channels = () => {
   const channels = useSelector(channelsSelectors.selectAll);
+  const dispatch = useDispatch();
+
   const { t } = useTranslation();
 
   return (
@@ -19,7 +21,7 @@ const Channels = (props) => {
           {t('channels.channels')}
         </span>
         <Button
-          onClick={() => showModal('addNewChannel')}
+          onClick={() => dispatch(modalsActions.showModal({ modalType: 'addNewChannel', itemId: null }))}
           variant="outline-primary"
           className="border p-1 m-1"
         >
@@ -28,9 +30,7 @@ const Channels = (props) => {
       </div>
       <Nav variant="pills" className="d-flex flex-column px-2">
         {channels.length > 0
-          && channels.map((channel) => (
-            <Channel key={channel.id} channel={channel} showModal={showModal} />
-          ))}
+          && channels.map((channel) => <Channel key={channel.id} channel={channel} />)}
       </Nav>
     </Col>
   );

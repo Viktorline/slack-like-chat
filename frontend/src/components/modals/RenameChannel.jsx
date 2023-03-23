@@ -3,20 +3,22 @@ import leoProfanity from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
 
-const Rename = (props) => {
-  const { onHide, id } = props;
+const Rename = () => {
+  const dispatch = useDispatch();
   const inputEl = useRef();
   const chat = useSocket();
   const { t } = useTranslation();
 
   const channels = useSelector(channelsSelectors.selectAll);
-  const currentChannel = channels.find((channel) => channel.id === id);
+  const itemId = useSelector((state) => state.modals.itemId);
+  const currentChannel = channels.find((channel) => channel.id === itemId);
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -38,9 +40,9 @@ const Rename = (props) => {
     validationSchema,
     onSubmit: (values) => {
       const cleanedName = leoProfanity.clean(values.name);
-      chat.renameChannel({ id, name: cleanedName });
+      chat.renameChannel({ id: itemId, name: cleanedName });
       toast.success(t('modal.rename.success'));
-      onHide();
+      dispatch(modalsActions.hideModal());
     },
   });
 
@@ -50,7 +52,7 @@ const Rename = (props) => {
 
   return (
     <Modal show centered>
-      <Modal.Header closeButton onHide={onHide}>
+      <Modal.Header closeButton onHide={() => dispatch(modalsActions.hideModal())}>
         <Modal.Title>{t('modal.rename.header')}</Modal.Title>
       </Modal.Header>
 
@@ -74,7 +76,7 @@ const Rename = (props) => {
             <Button type="submit" variant="primary" className="me-2">
               {t('modal.rename.rename')}
             </Button>
-            <Button variant="secondary" onClick={onHide}>
+            <Button variant="secondary" onClick={() => dispatch(modalsActions.hideModal())}>
               {t('modal.rename.cancel')}
             </Button>
           </div>

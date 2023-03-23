@@ -15,7 +15,10 @@ const Message = (props) => {
     >
       <Card.Body className="text-break p-2">
         <Card.Text className={`mb-1 ${isCurrentUser ? 'text-end' : ''}`}>{content.body}</Card.Text>
-        <Card.Text style={{ fontSize: '10px' }} className={`${isCurrentUser ? 'text-end' : ''}`}>
+        <Card.Text
+          style={{ fontSize: '10px' }}
+          className={` text-muted ${isCurrentUser ? 'text-end' : ''}`}
+        >
           <b>{content.username}</b>
         </Card.Text>
       </Card.Body>
