@@ -45,7 +45,9 @@ const Header = () => {
                 className="btn-outline-secondary"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                onClick={() => auth.logOut()}
+                onClick={() => {
+                  auth.logOut(), handleMouseLeave();
+                }}
                 style={{ minWidth: '90px' }}
               >
                 {isHovered ? t('logout') : auth.user.username}

@@ -18,8 +18,8 @@ const Messages = () => {
   const { t } = useTranslation();
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const currentChannel = useSelector(
-    (state) => channelsSelectors.selectById(state, currentChannelId),
+  const currentChannel = useSelector((state) =>
+    channelsSelectors.selectById(state, currentChannelId),
   );
   const messages = useSelector(messagesSelectors.selectAll);
   const currentMessages = messages.filter(
@@ -75,12 +75,10 @@ const Messages = () => {
             <b>{`# ${currentChannel?.name}`}</b>
           </p>
           <span className="text-muted">
-            {currentMessages.length}
-            {' '}
-            {t('messages.messages')}
+            {currentMessages.length} {t('messages.messages')}
           </span>
         </div>
-        <div id="messages-box" className="chat-messages overflow-auto px-5 ">
+        <div id="messages-box" className="chat-messages overflow-auto px-5 d-flex flex-column">
           {messagesRender()}
           <span ref={lastMessageRef} />
         </div>
