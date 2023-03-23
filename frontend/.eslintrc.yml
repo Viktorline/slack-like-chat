@@ -21,10 +21,6 @@ plugins:
   - functional
 
 rules:
-  # implicit-arrow-linebreak: off
-  # function-paren-newline: off
-  # react/jsx-one-expression-per-line: off
-  # object-curly-newline: 'off'
   functional/no-conditional-statements: off
   react/jsx-no-constructed-context-values: off
 
