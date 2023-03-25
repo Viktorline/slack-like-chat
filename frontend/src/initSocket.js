@@ -9,7 +9,7 @@ const initSocket = () => {
 
   const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
     if (response.status !== 'ok') {
-      console.log(response.status);
+      console.error(response.status);
     }
   });
 
@@ -22,7 +22,7 @@ const initSocket = () => {
       const { id } = response.data;
       store.dispatch(channelsActions.setCurrentChannelId(id));
     } else {
-      console.log(response.status);
+      console.error(response.status);
     }
   });
 
@@ -32,7 +32,7 @@ const initSocket = () => {
 
   const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
     if (response.status !== 'ok') {
-      console.log(response.status);
+      console.error(response.status);
     }
   });
 
@@ -42,7 +42,7 @@ const initSocket = () => {
 
   const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
     if (response.status !== 'ok') {
-      console.log(response.status);
+      console.error(response.status);
     }
   });
 

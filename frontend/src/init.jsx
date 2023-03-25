@@ -13,7 +13,7 @@ import resources from './locales/index.js';
 import store from './slices/index.js';
 
 const rollbarConfig = {
-  accessToken: '02cd77972a264dbb9c9981c6b8f12537',
+  accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
   environment: 'testenv',
 };
 

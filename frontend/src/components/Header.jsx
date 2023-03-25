@@ -19,6 +19,8 @@ const Header = () => {
     setIsHovered(false);
   };
 
+  const buttonWidth = (auth.user?.username?.length ?? 0) * 12;
+
   return (
     <Navbar className="shadow-sm navbar-expand-lg navbar-light bg-white">
       <Container>
@@ -51,7 +53,7 @@ const Header = () => {
                   auth.logOut();
                   handleMouseLeave();
                 }}
-                style={{ minWidth: '90px' }}
+                style={{ width: `${buttonWidth}px` }}
               >
                 {isHovered ? t('logout') : auth.user.username}
               </Button>
