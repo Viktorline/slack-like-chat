@@ -53,7 +53,7 @@ const Header = () => {
                   auth.logOut();
                   handleMouseLeave();
                 }}
-                style={{ width: `${buttonWidth}px` }}
+                style={{ width: `${buttonWidth <= 60 ? 90 : buttonWidth}px` }}
               >
                 {isHovered ? t('logout') : auth.user.username}
               </Button>
