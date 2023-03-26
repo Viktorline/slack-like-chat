@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Button, ButtonGroup, Container, Dropdown, DropdownButton, Navbar,
 } from 'react-bootstrap';
@@ -9,17 +9,6 @@ import { useAuth } from '../hooks/index.js';
 const Header = () => {
   const auth = useAuth();
   const { t, i18n } = useTranslation();
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const buttonWidth = (auth.user?.username?.length ?? 0) * 12;
 
   return (
     <Navbar className="shadow-sm navbar-expand-lg navbar-light bg-white">
@@ -47,15 +36,11 @@ const Header = () => {
               <Button
                 variant=""
                 className="btn-outline-secondary"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
                 onClick={() => {
                   auth.logOut();
-                  handleMouseLeave();
                 }}
-                style={{ width: `${buttonWidth <= 80 ? 90 : buttonWidth}px` }}
               >
-                {isHovered ? t('logout') : auth.user.username}
+                {t('logout')}
               </Button>
             )}
           </ButtonGroup>

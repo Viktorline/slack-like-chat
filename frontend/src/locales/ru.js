@@ -4,7 +4,7 @@ export default {
     en: 'English',
 
     login: 'Войти',
-    logout: 'Выйти?',
+    logout: 'Выйти',
 
     password: 'Пароль',
     inputRequirements: 'От 3 до 20 символов',

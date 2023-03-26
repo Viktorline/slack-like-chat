@@ -4,7 +4,7 @@ export default {
     en: 'English',
 
     login: 'Login',
-    logout: 'Logout?',
+    logout: 'Logout',
 
     password: 'Password',
     inputRequrements: '3 to 20 symbols',
