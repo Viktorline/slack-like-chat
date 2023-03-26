@@ -19,8 +19,10 @@ const Chat = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(routes.dataPath(), { headers: auth.getAuthHeader() });
-      console.log(response);
+      const currentUser = JSON.parse(localStorage.getItem('user'));
+      const response = await axios.get(routes.dataPath(), {
+        headers: { Authorization: `Bearer ${currentUser.token}` },
+      });
       const { channels, currentChannelId, messages } = response.data;
 
       dispatch(channelsActions.addChannels(channels));
