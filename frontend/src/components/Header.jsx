@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button, ButtonGroup, Container, Dropdown, DropdownButton, Navbar,
-} from 'react-bootstrap';
+import { Button, ButtonGroup, Container, Dropdown, DropdownButton, Navbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/index.js';
@@ -53,7 +51,7 @@ const Header = () => {
                   auth.logOut();
                   handleMouseLeave();
                 }}
-                style={{ width: `${buttonWidth <= 60 ? 90 : buttonWidth}px` }}
+                style={{ width: `${buttonWidth <= 80 ? 90 : buttonWidth}px` }}
               >
                 {isHovered ? t('logout') : auth.user.username}
               </Button>
