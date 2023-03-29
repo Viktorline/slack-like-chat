@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useAuth } from '../hooks/index.js';
@@ -13,7 +12,6 @@ const Login = () => {
   const { logIn } = useAuth();
   const [authFailed, setAuthFailed] = useState(false);
   const inputRef = useRef();
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -36,8 +34,6 @@ const Login = () => {
         const { data } = await axios.post(routes.loginPath(), values);
         logIn(data);
         localStorage.setItem('user', JSON.stringify(data));
-        console.log(data);
-        navigate('/');
       } catch (err) {
         console.log(err);
         if (err.isAxiosError) {
@@ -116,7 +112,7 @@ const Login = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <a href="/signup">{t('loginPage.registration')}</a>
+                <a href={routes.singUpPagePath()}>{t('loginPage.registration')}</a>
               </div>
             </div>
           </div>

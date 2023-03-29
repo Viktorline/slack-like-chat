@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useAuth } from '../hooks/index.js';
@@ -14,7 +13,6 @@ const RegistrationPage = () => {
   const [registrationFailed, setRegistrationFailed] = useState(false);
 
   const inputRef = useRef();
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -49,9 +47,7 @@ const RegistrationPage = () => {
           username: values.username,
           password: values.password,
         });
-        console.log(response.data);
         auth.logIn(response.data);
-        navigate('/');
       } catch (err) {
         console.log(err);
         if (err.isAxiosError) {
@@ -157,7 +153,7 @@ const RegistrationPage = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <a href="/login">{t('login')}</a>
+                <a href={routes.loginPagePath()}>{t('login')}</a>
               </div>
             </div>
           </div>

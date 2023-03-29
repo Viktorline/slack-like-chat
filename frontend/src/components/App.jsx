@@ -18,8 +18,8 @@ const LoginRoute = () => {
 };
 
 const App = () => (
-  <AuthProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <div className="d-flex flex-column vh-100">
         <Header />
         <Routes>
@@ -30,8 +30,8 @@ const App = () => (
         </Routes>
       </div>
       <ToastContainer />
-    </BrowserRouter>
-  </AuthProvider>
+    </AuthProvider>
+  </BrowserRouter>
 );
 
 export default App;
