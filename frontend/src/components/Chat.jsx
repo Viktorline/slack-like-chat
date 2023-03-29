@@ -19,7 +19,7 @@ const Chat = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const currentUser = JSON.parse(localStorage.getItem('user'));
+      const { currentUser } = auth;
       const response = await axios.get(routes.dataPath(), {
         headers: { Authorization: `Bearer ${currentUser.token}` },
       });
