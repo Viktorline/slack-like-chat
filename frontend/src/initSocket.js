@@ -17,12 +17,11 @@ const initSocket = () => {
     store.dispatch(messagesActions.addMessage(payload));
   });
 
-  const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
-    if (response.status === 'ok') {
-      const { id } = response.data;
-      store.dispatch(channelsActions.setCurrentChannelId(id));
+  const addNewChannel = (channel, callback) => socket.emit('newChannel', channel, ({ data, status }) => {
+    if (status === 'ok') {
+      callback(data.id);
     } else {
-      console.error(response.status);
+      console.error(status);
     }
   });
 

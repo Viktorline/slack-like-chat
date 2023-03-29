@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useSocket } from '../../hooks/index.js';
-import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import {
+  actions as channelsActions,
+  selectors as channelsSelectors,
+} from '../../slices/channelsSlice.js';
 import { actions as modalsActions } from '../../slices/modalsSlice.js';
 
 const Add = () => {
@@ -42,7 +45,9 @@ const Add = () => {
     validationSchema,
     onSubmit: (values) => {
       const cleanedName = leoProfanity.clean(values.name);
-      chat.addNewChannel({ name: cleanedName });
+      console.log(channelsSelectors);
+      const callback = (id) => dispatch(channelsActions.setCurrentChannelId(id));
+      chat.addNewChannel({ name: cleanedName }, callback);
 
       toast.success(t('modal.add.success'));
       dispatch(modalsActions.hideModal());
