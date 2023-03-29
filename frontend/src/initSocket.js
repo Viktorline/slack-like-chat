@@ -4,8 +4,20 @@ import { actions as channelsActions } from './slices/channelsSlice.js';
 import store from './slices/index.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
 
-const initSocket = () => {
+const initSocket = (onDisconnect) => {
   const socket = io();
+
+  socket.on('connect_error', () => {
+    if (typeof onDisconnect === 'function') {
+      onDisconnect();
+    }
+  });
+
+  socket.on('disconnect', () => {
+    if (typeof onDisconnect === 'function') {
+      onDisconnect();
+    }
+  });
 
   const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
     if (response.status !== 'ok') {
@@ -58,6 +70,7 @@ const initSocket = () => {
   });
 
   return {
+    socket,
     addNewMessage,
     addNewChannel,
     removeChannel,

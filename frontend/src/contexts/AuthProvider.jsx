@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import initSocket from '../initSocket.js';
 import routes from '../routes.js';
 
 import { AuthContext } from './index.js';
@@ -16,10 +17,23 @@ const AuthProvider = ({ children }) => {
     navigate(routes.rootPagePath());
   };
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     localStorage.removeItem('user');
     setUser(null);
-  };
+    navigate(routes.loginPagePath());
+  }, [navigate]);
+
+  useEffect(() => {
+    if (user) {
+      const socketInstance = initSocket(() => logOut());
+      return () => {
+        if (socketInstance.socket.connected) {
+          socketInstance.socket.disconnect();
+        }
+      };
+    }
+    return undefined;
+  }, [user, logOut]);
 
   return (
     <AuthContext.Provider
