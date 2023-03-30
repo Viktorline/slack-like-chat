@@ -8,4 +8,5 @@ export default {
   rootPagePath: () => '/',
   loginPagePath: () => '/login',
   singUpPagePath: () => '/signup',
+  notFoundPagePath: () => '*',
 };

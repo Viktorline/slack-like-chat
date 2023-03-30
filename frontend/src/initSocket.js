@@ -13,12 +13,6 @@ const initSocket = (onDisconnect) => {
     }
   });
 
-  socket.on('disconnect', () => {
-    if (typeof onDisconnect === 'function') {
-      onDisconnect();
-    }
-  });
-
   const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
     if (response.status !== 'ok') {
       console.error(response.status);

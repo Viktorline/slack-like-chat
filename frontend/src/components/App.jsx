@@ -5,6 +5,7 @@ import {
 import { ToastContainer } from 'react-toastify';
 import AuthProvider from '../contexts/AuthProvider.jsx';
 import { useAuth } from '../hooks/index.js';
+import routes from '../routes.js';
 
 import Chat from './Chat.jsx';
 import Header from './Header.jsx';
@@ -23,10 +24,10 @@ const App = () => (
       <div className="d-flex flex-column vh-100">
         <Header />
         <Routes>
-          <Route path="/" element={<LoginRoute />} />
-          <Route path="/signup" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path={routes.rootPagePath()} element={<LoginRoute />} />
+          <Route path={routes.singUpPagePath()} element={<Registration />} />
+          <Route path={routes.loginPagePath()} element={<Login />} />
+          <Route path={routes.notFoundPagePath()} element={<PageNotFound />} />
         </Routes>
       </div>
       <ToastContainer />
