@@ -14,7 +14,11 @@ import store from './slices/index.js';
 
 const rollbarConfig = {
   accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
-  environment: 'testenv',
+  payload: {
+    environment: 'production',
+  },
+  captureUncaught: true,
+  captureUnhandledRejections: true,
 };
 
 const init = async () => {
